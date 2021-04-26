@@ -1,0 +1,158 @@
+body {
+    background-color: black;
+}
+.header-top {
+    margin-bottom: 0!important;
+}
+
+.nav-elements > li > a {
+    font-size: 15px!important;
+    text-transform: uppercase!important;
+    font-weight: 500;
+}
+.navbar {
+    background-color: #b30808;
+    padding: 0!important;
+}
+
+.navbar .nav-link:hover {
+    background-color: #a50a0a;
+}
+/* Set the border color */
+
+.custom-toggler.navbar-toggler {
+    border: 0!important;
+}
+/* Setting the stroke to green using rgb values (0, 128, 0) */
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url(
+"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")!important;
+}
+.navbar .nav-link {
+    color:white!important;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    padding: 15px 25px!important;
+}
+
+/*   MEGA MENU   */
+.megamenu {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border: none!important;
+}
+.col-megamenu {
+    margin: 10px 5px 20px 5px;
+}
+.col-megamenu h6 {
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+.col-megamenu ul li a {
+    text-decoration: none;
+    color: #555;
+    width: 100%;
+    display: block;
+    padding: 5px 10px;
+
+
+}
+
+.col-megamenu ul li {
+    border-radius: 5px;
+    transition: 100ms;
+}
+.col-megamenu ul li a:hover {
+    color: #000;
+}
+.col-megamenu ul li:hover {
+    background-color: #f5f5f5;
+}
+footer ul {
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li ul {
+    margin-left: 20px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #666!important;
+}
+footer a:hover {
+    color: red!important;
+}
+footer ul li {
+    list-style: none;
+}
+
+/* Cards */
+.card {
+    transition: 120ms;
+    border: 0!important;
+}
+.card:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.card-body {
+    padding: 10px 10px 5px 10px!important;
+    background-color: #f6f6f6;
+}
+.card-body a{
+    color: #333;
+    text-decoration: none;
+    transition: 100ms;
+}
+
+.card-body a:hover {
+    color: #bf0404 !important;
+}
+
+/* Bortitokep */
+.boritokep {
+    display: none;
+}
+
+@media all and (min-width: 992px) {
+	.navbar{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+	.navbar .has-megamenu{
+        position:static!important;
+    }
+	.navbar .megamenu{
+        left:0;
+        right:0;
+        width:100%;
+        padding:20px;
+    }
+	.navbar .nav-link{
+        padding-top:1rem;
+        padding-bottom:1rem;
+    }
+}
+
+
+
+
+
+
+.page-footer li {
+    color: black!important;
+}
+
+.page-footer a {
+    color: black!important;
+}
+.footer-contact li ul {
+    margin-left: 15px;
+}
+
+/* Home title */
+

@@ -1,0 +1,57 @@
+h2 {
+    font-size: 33px !important;
+}
+
+.paletta {
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    margin: 5px;
+    position: relative;
+}
+
+.paletta img {
+    max-width: 400px;
+    height: auto;
+}
+
+.paletta:hover {
+    cursor: pointer;
+}
+
+.paletta .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    width: 100px;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 2px;
+    opacity: 0.8;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.paletta:hover .tooltiptext {
+    visibility: visible;
+}
+.pro_parent{
+    min-width: 500px!important;
+    min-height: 500px!important;
+}
+#image-to-change {
+    max-width: 100%;
+    height: auto;
+}
+.parent-color {
+    border-radius: 50%;
+}
+.active-color {
+border:2px solid #000;
+}
+

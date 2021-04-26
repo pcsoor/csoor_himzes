@@ -1,0 +1,144 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block content %}
+
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
+    {% endblock %}
+
+    <div class="row mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
+                {% if kat.get_root.nev != kat.nev%}
+                    <li class="breadcrumb-item">
+                        <a href="/kategoria/{{ kat.get_root.id }}/{{ kat.get_root.slug }}">{{ kat.get_root }}</a>
+                    </li>
+                {% else %}
+
+                {% endif %}
+
+                <li class="breadcrumb-item active" aria-current="page">{{ kat }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row my-3">
+
+        {% if termekek.count != 0 %}
+            {% for termek in termekek|dictsort:"sorrend" %}
+                <div class="row my-5 parent-image-block">
+                    <div class="col-lg-6 pro-img mb-3" id="pro_parent" style="text-align: center">
+                        <img src="{{ termek.image_id.image.url }}"
+                             alt="{{ termek.nev }}"
+                             class="{{ termek.nev }}"
+                             id="image-to-change" />
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="row px-2">
+                            <h2>{{ termek.nev }}</h2>
+                            <hr>
+                        </div>
+                        <div class="row px-2">
+                            <table class="table table-bordered col-md-6 mt-5 mb-4">
+                                {% if termek.osszetetel != None %}
+                                    <tr>
+                                        <td style="font-weight: 700;">Összetétel</td>
+                                        <td>{{ termek.osszetetel }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if termek.anyag != None %}
+                                    <tr>
+                                        <td style="font-weight: 700;">Anyag</td>
+                                        <td>{{ termek.anyag }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if termek.kulso != None %}
+                                    <tr>
+                                        <td style="font-weight: 700;">Külső</td>
+                                        <td>{{ termek.kulso }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if termek.tomeg != None %}
+                                    <tr>
+                                        <td style="font-weight: 700;">Tömeg</td>
+                                        <td>{{ termek.tomeg }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if meretek.count != 0 %}
+                                    <tr>
+                                        <td style="font-weight: 700;">Méretek</td>
+                                        <td>
+                                            {% for meret in termek.meret_id.all %}
+                                                {{ meret.nev }}{% if forloop.counter != termek.meret_id.all.count %},
+                                                {% else %} {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+
+                            </table>
+
+                        </div>
+                        <div class="row mb-4">
+                            {% if szinek.count != 0 or termek.szin_id != None %}
+                                <h5>Színskála</h5>
+                                <div class="d-flex justify-content-start thumb-img flex-wrap">
+
+                                    {% for szin in termek.szin_id.all|dictsort:"hex" %}
+
+                                        <div class="paletta"
+                                             style="background-color: {{ szin.hex }};"
+                                             data-toggle="tooltip" title="{{ szin.nev }}">
+
+                                            <img src="{{ szin.image.url }}" alt="szin" style="width: 0; height: 0;">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="row">
+                            <h5>Leírás</h5>
+                            <p>{{ termek.leiras }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter != termekek.count %}
+                    <hr>
+                {% else %}
+
+                {% endif %}
+
+
+
+            {% endfor %}
+
+
+        {% else %}
+            <div class="row">
+                <div class="col-12 bg-warning rounded">
+                    <p class="mt-3">Nincs termék a kategóriában!</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <!-- onclick="changeImage(this)" -->
+    <script>
+        $(document).ready(function () {
+            $(".paletta").click(function () {
+                var paletta = $(this).children("img").attr("src");
+                var pro_img = $(this).closest(".parent-image-block").children("#pro_parent").children("img");
+                var pro_img_class = $("#pro_parent").children("img").attr("class");
+                //var variable = $(".{{ termek.nev }}").attr("src");
+                //alert(pro_img);
+                $(pro_img).attr("src", paletta);
+            })
+        });
+    </script>
+
+
+{% endblock %}

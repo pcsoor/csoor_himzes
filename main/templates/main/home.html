@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+{% load mptt_tags %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row my-5">
+
+
+    {% recursetree kategoriak %}
+        {% if node.is_root_node and node.status %}
+            <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
+                <div class="card mx-auto">
+                    <a href="
+                        {% if not node.is_leaf_node %}
+                            /kategoria/{{ node.id }}/{{ node.slug }}
+                        {% elif node.is_leaf_node %}
+                            /termek/{{ node.id }}/{{ node.slug }}
+                        {% endif %}
+                    ">
+                        <img class="card-img-top" src="http://placehold.it/350x250" alt="Sample Title"></a>
+                    <div class="card-body">
+                        <h5><a href="
+                        {% if not node.is_leaf_node %}
+                            /kategoria/{{ node.id }}/{{ node.slug }}
+                        {% elif node.is_leaf_node %}
+                            /termek/{{ node.id }}/{{ node.slug }}
+                        {% endif %}
+                        ">{{ node.nev }}</a></h5>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endrecursetree %}
+</div>
+{% endblock %}
