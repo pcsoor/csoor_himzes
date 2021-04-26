@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block content %}
+    <div class="row mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ kat.nev }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row mb-5" id="borito">
+
+        <img src="{{ boritokep.url }}" alt="{{ kategoria.nev }}" class="img-fluid">
+    </div>
+    <div class="row mb-3">
+        <h2>{{ kat.nev }}</h2>
+        <hr>
+    </div>
+
+
+    <div class="row my-5">
+        {% recursetree kategoria %}
+            {% if not node.is_leaf_node %}
+                {% for child in node.get_descendants %}
+                    <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
+                        <div class="card mx-auto">
+                            <a href="/termek/{{ child.id }}/{{ child.slug }}"><img class="card-img-top"
+                                                                                   src="{{ child.borito.url }}"
+                                                                                   alt="Sample Title"></a>
+                            <div class="card-body">
+                                <h5><a href="/termek/{{ child.id }}/{{ child.slug }}">{{ child.nev }}</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% elif node.is_leaf_node %}
+                <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
+                    <div class="card mx-auto">
+                        <a href="/termek/{{ node.id }}/{{ node.slug }}"><img class="card-img-top"
+                                                                             src="http://placehold.it/350x250"
+                                                                             alt="Sample Title"></a>
+                        <div class="card-body">
+                            <h5><a href="/termek/{{ node.id }}/{{ node.slug }}">{{ node.nev }}</a></h5>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+
+        {% endrecursetree %}
+    </div>
+{% endblock %}
