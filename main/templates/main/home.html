@@ -9,13 +9,12 @@
 
 {% block content %}
 
-<div class="row my-5">
+    <div class="row my-5">
 
 
-    {% recursetree kategoriak %}
-        {% if node.is_root_node and node.status %}
-            <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
-                <div class="card mx-auto">
+        {% recursetree kategoriak %}
+            {% if node.is_root_node and node.status %}
+                <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
                     <a href="
                         {% if not node.is_leaf_node %}
                             /kategoria/{{ node.id }}/{{ node.slug }}
@@ -23,19 +22,21 @@
                             /termek/{{ node.id }}/{{ node.slug }}
                         {% endif %}
                     ">
-                        <img class="card-img-top" src="http://placehold.it/350x250" alt="Sample Title"></a>
-                    <div class="card-body">
-                        <h5><a href="
-                        {% if not node.is_leaf_node %}
-                            /kategoria/{{ node.id }}/{{ node.slug }}
-                        {% elif node.is_leaf_node %}
-                            /termek/{{ node.id }}/{{ node.slug }}
-                        {% endif %}
-                        ">{{ node.nev }}</a></h5>
-                    </div>
+                        <div class="card text-white d-flex"
+                        >
+                            <div class="card-body"
+                                 style="background-image: url({{ node.image.url }}); background-position: center; background-repeat: no-repeat; background-size: cover;">
+
+                            </div>
+
+
+                            <div class="card-title text-center">{{ node.nev }}</div>
+                        </div>
+
+                    </a>
+
                 </div>
-            </div>
-        {% endif %}
-    {% endrecursetree %}
-</div>
+            {% endif %}
+        {% endrecursetree %}
+    </div>
 {% endblock %}

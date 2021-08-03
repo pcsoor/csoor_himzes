@@ -19,11 +19,8 @@ def homepage(request):
 
 
 def kapcsolat(request):
-    uzenet = "Kapcsolat oldal"
-    context = {
-        'uzenet': uzenet,
-    }
-    return render(request, 'main/kapcsolat.html', context)
+
+    return render(request, 'main/kapcsolat.html')
 
 def rolunk(request):
     uzenet = "Rólunk oldal"
