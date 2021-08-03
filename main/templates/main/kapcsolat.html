@@ -1,4 +1,89 @@
 {% extends 'main/base.html' %}
 {% block content %}
-    {{ uzenet }}
+    <div class="row my-3">
+        <h2>Kapcsolat</h2>
+    </div>
+    <div class="row my-5">
+        <div class="col-md-6">
+            <table class="">
+                <tr>
+                    <td style="text-align: right;padding-right:10px;">Kapcsolattartók:</td>
+                    <td>Csoór Zoltán</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>30/384-4344</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Csoór Zoltánné</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>30/384-4341</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;padding-right:10px;">E-mail:</td>
+                    <td><a
+                            href="mailto:csoor.zoltanne1969@gmail.com">csoor.zoltanne1969@gmail.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><a href="mailto:zoltancsoor@gmail.com">zoltancsoor@gmail.com</a></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;padding-right:10px;">Székhely:</td>
+                    <td>ARPEVÉ KFT.</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>5000 Szolnok,</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Háromrózsa út 5.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;padding-right:10px;">Telephelyeink:</td>
+                    <td>CSOÓR HÍMZŐSTÚDIÓ</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>5000 Szolnok,</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Tófenék út 4.</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfbXpq6SJOxWgFFD4trrLB5lWgI26PiEM&callback=initMap">
+    </script>
+
+
+    <script type="text/javascript">
+
+        function initMap() {
+            // The location of Uluru
+            const uluru = {lat: 47.175928745376424, lng: 20.19692500445217};
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 17,
+                center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }
+
+    </script>
 {% endblock %}

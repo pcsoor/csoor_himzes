@@ -41,10 +41,10 @@
             <a href="/"><img alt="Csoór hímzőstúdió" src="{% static 'images/logo.jpg' %}" style="margin:10px 0;"/></a>
         </div>
         <div class="col-md-6 text-center">
-            <p class="align-middle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa deleniti, ducimus eligendi enim excepturi hic nisi quidem similique unde veniam.</p>
+
         </div>
         <div class="col-md-3">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, magni.</p>
+
         </div>
 
     </div>
@@ -85,12 +85,15 @@
                                             </ul>
                                         </div>  <!-- col-megamenu.// -->
                                     </div><!-- end col-3 -->
+
+
                                 {% elif node.is_leaf_node %}
                                     <div class="col-md-3">
                                         <div class="col-megamenu">
                                             <h6 class="title">{{ node.nev }}</h6>
                                             <ul class="list-unstyled">
-                                                <li><a href="/termek/{{ node.id }}/{{ node.slug }}">{{ node.nev }}</a>
+                                                <li>
+                                                    <a href="/termek/{{ node.id }}/{{ node.slug }}">{{ node.nev }}</a>
                                                 </li>
                                             </ul>
                                         </div>  <!-- col-megamenu.// -->
@@ -101,18 +104,18 @@
                         </div> <!-- dropdown-mega-menu.// -->
                     </div>
                 </li>
+                {% if user.is_superuser %}
+                    <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+                {% endif %}
             </ul>
         </div> <!-- navbar-collapse.// -->
     </div>
 </nav>
 
-
 <div class="container">
+        {% block content %}
 
-        {% block content %}{% endblock %}
-
-
-
+        {% endblock %}
 </div>
 
 <!-- FOOTER-->
