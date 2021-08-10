@@ -11,32 +11,35 @@
 
     <div class="row my-5">
 
+    {% for node in kategoriak %}
+        {% if forloop.counter0 == 0 %}
+            <h2 class="home-title">Pólók, törölközők gépi hímzése</h2>
+        {% endif %}
+        {% if forloop.counter0 == 3 %}
+            <h2 class="home-title">Az ár a hímzést tartalmazza</h2>
+        {% endif %}
+        {% if forloop.counter0 == 13 %}
+            <h2 class="home-title">Lógók, felvarrók hímzése</h2>
+        {% endif %}
+        {% if forloop.counter0 == 20 %}
+            <h2 class="home-title">Minőségi munka, gyors határidő</h2>
+        {% endif %}
 
-        {% recursetree kategoriak %}
-            {% if node.is_root_node and node.status %}
-                <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
-                    <a href="
-                        {% if not node.is_leaf_node %}
-                            /kategoria/{{ node.id }}/{{ node.slug }}
-                        {% elif node.is_leaf_node %}
-                            /termek/{{ node.id }}/{{ node.slug }}
-                        {% endif %}
-                    ">
-                        <div class="card text-white d-flex"
-                        >
-                            <div class="card-body"
-                                 style="background-image: url({{ node.image.url }}); background-position: center; background-repeat: no-repeat; background-size: cover;">
+        {% if node.is_root_node and node.status %}
+                    <div class="card-thumbs col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <a href="{% if not node.is_leaf_node %}{% url 'kategoriak' id=node.id slug=node.slug %}{% elif node.is_leaf_node %}{% url 'termekek' id=node.id slug=node.slug %}{% endif %}">
+                            <div class="card">
+                                <div class="card-body" style="background-image: url({{ node.image.url }}); background-position: center; background-repeat: no-repeat; background-size: cover;"></div>
 
+                                <div class="card-title text-center mb-0" {% if node.nev|length >= 35 %}style="font-size: 14px!important;"{% endif %}>{{ node.nev }}</div>
                             </div>
+                        </a>
+
+                    </div>
+                {% endif %}
+    {% endfor %}
 
 
-                            <div class="card-title text-center">{{ node.nev }}</div>
-                        </div>
 
-                    </a>
-
-                </div>
-            {% endif %}
-        {% endrecursetree %}
     </div>
 {% endblock %}

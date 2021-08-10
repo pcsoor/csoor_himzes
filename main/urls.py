@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.homepage, name="homepage"),
@@ -23,6 +25,10 @@ urlpatterns = [
     path('rolunk/', views.rolunk, name="rolunk"),
     path('viszonteladoknak/', views.viszonteladoknak, name="viszonteladoknak"),
     path('cegeknek/', views.cegeknek, name="cegeknek"),
-    path('kategoria/<int:id>/<slug:slug>', views.kategoriak, name='kategoriak'),
-    path('termek/<int:id>/<slug:slug>', views.termekek, name='termekek'),
+    path('kategoria/<int:id>-<slug:slug>', views.kategoriak, name='kategoriak'),
+    path('termek/<int:id>-<slug:slug>', views.termekek, name='termekek'),
+    path('summernote/', include('django_summernote.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

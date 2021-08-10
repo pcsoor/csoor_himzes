@@ -1,13 +1,15 @@
 from django.contrib import admin
-from .models import Kategoria, Szin, Meret, Termek
+from .models import Kategoria, Szin, Meret, Termek, Color
 from mptt.admin import DraggableMPTTAdmin
+from django_summernote.admin import SummernoteModelAdmin
 
 
-class KategoriaAdmin(DraggableMPTTAdmin):
+class KategoriaAdmin(DraggableMPTTAdmin, SummernoteModelAdmin):
     mptt_indent_field = "nev"
     list_display = ('tree_actions', 'indented_title',
                     'related_Termeks_count', 'related_Termeks_cumulative_count')
     list_display_links = ('indented_title',)
+    summernote_fields = ('leiras',)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -37,9 +39,10 @@ class KategoriaAdmin(DraggableMPTTAdmin):
     related_Termeks_cumulative_count.short_description = 'Related Termeks (in tree)'
 
 
-class TermekekAdmin(admin.ModelAdmin):
+class TermekekAdmin(SummernoteModelAdmin):
     list_display = ('nev', 'sorrend', 'get_kategoria', 'get_meretek', 'ar', 'osszetetel', 'kulso', 'anyag')
     filter_horizontal = ['szin_id','meret_id']
+    summernote_fields = ('leiras',)
 
     def get_kategoria(self, obj):
         return obj.kategoria_id.nev
@@ -56,13 +59,27 @@ class TermekekAdmin(admin.ModelAdmin):
     get_meretek.short_description = 'Méretek'
 
 
+class SzinAdmin(admin.ModelAdmin):
+    list_display = ('id', 'image', 'szin')
+    list_editable = ('szin',)
 
+
+class MeretekAdmin(admin.ModelAdmin):
+    list_display = ('nev', 'sorrend')
+    list_editable = ('sorrend',)
+
+
+class ColorAdmin(admin.ModelAdmin):
+    list_display = ('nev', 'hex', 'azonosito', 'small_image', 'sotet')
+    list_display_links = ('nev',)
+    list_editable = ('hex', 'azonosito', 'small_image','sotet')
 
 
 # Register your models here.
 admin.site.register(Kategoria, KategoriaAdmin)
-admin.site.register(Szin)
-admin.site.register(Meret)
+admin.site.register(Szin, SzinAdmin)
+admin.site.register(Color, ColorAdmin)
+admin.site.register(Meret, MeretekAdmin)
 admin.site.register(Termek, TermekekAdmin)
 
 

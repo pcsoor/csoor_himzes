@@ -10,10 +10,13 @@
             </ol>
         </nav>
     </div>
+    {% if boritokep %}
     <div class="row mb-5" id="borito">
 
         <img src="{{ boritokep.url }}" alt="{{ kategoria.nev }}" class="img-fluid">
     </div>
+    {% endif %}
+
     <div class="row mb-3">
         <h2>{{ kat.nev }}</h2>
         <hr>
@@ -24,15 +27,14 @@
         {% recursetree kategoria %}
             {% if not node.is_leaf_node %}
                 {% for child in node.get_descendants %}
-                    <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
-                        <div class="card mx-auto">
-                            <a href="/termek/{{ child.id }}/{{ child.slug }}"><img class="card-img-top"
-                                                                                   src="{{ child.borito.url }}"
-                                                                                   alt="Sample Title"></a>
-                            <div class="card-body">
-                                <h5><a href="/termek/{{ child.id }}/{{ child.slug }}">{{ child.nev }}</a></h5>
+                    <div class="card-thumbs col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <a href="{% url 'termekek' id=child.id slug=child.slug %}">
+                            <div class="card text-white d-flex">
+                                <div class="card-body" style="background-image: url({{ child.borito.url }}); background-position: center; background-repeat: no-repeat; background-size: cover;"></div>
+
+                                <div class="card-title text-center mb-0">{{ child.nev }}</div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 {% endfor %}
             {% elif node.is_leaf_node %}

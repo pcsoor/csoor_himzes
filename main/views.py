@@ -3,7 +3,7 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from .models import Szin, Meret, Termek, Kategoria
+from .models import Szin, Meret, Termek, Kategoria, Color
 
 # Create your views here.
 def homepage(request):
@@ -23,11 +23,7 @@ def kapcsolat(request):
     return render(request, 'main/kapcsolat.html')
 
 def rolunk(request):
-    uzenet = "Rólunk oldal"
-    context = {
-        'uzenet': uzenet,
-    }
-    return render(request, 'main/rolunk.html', context)
+    return render(request, 'main/rolunk.html')
 
 
 
@@ -37,7 +33,7 @@ def kategoriak(request,id, slug):
 
     boritokep = ""
     for foo in kategoria:
-        boritokep = foo.image
+        boritokep = foo.borito
 
     context = {
         'kategoria': kategoria,
@@ -49,21 +45,20 @@ def kategoriak(request,id, slug):
 def termekek(request, id, slug):
     termekek = Termek.objects.filter(kategoria_id=id).order_by("sorrend")
     kat = Kategoria.objects.filter(id=id).first()
+    colors = Color.objects.filter(szin=id)
 
-    # termek = termekek.first()
+
     context = {
         'termekek': termekek,
         'kat': kat,
+        'colors': colors,
     }
     return render(request, 'main/termekek.html', context)
 
 
 def viszonteladoknak(request):
-    uzenet = "Viszonteladóknak oldal"
-    context = {
-        'uzenet': uzenet,
-    }
-    return render(request, 'main/viszonteladoknak.html', context)
+
+    return render(request, 'main/viszonteladoknak.html')
 
 def cegeknek(request):
     uzenet = "Cégeknek oldal"

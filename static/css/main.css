@@ -10,7 +10,7 @@
 }
 
 .navbar {
-    background-color: #b30808;
+    background-color: #810d0d;
     padding: 0 !important;
 }
 
@@ -33,9 +33,7 @@
 
 .navbar .nav-link {
     color: white !important;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 18px;
     font-weight: 500;
     padding: 15px 25px !important;
 }
@@ -140,42 +138,54 @@ footer ul li a {
 /* Cards */
 .card {
     transition: 120ms;
-    border: 0 !important;
-    position: relative;
-    display: block;
-    min-width: 300px;
-    max-width: 300px;
-    min-height: 200px;
-    max-height: 200px;
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 260px;
+    max-height: 260px;
+    margin: 15px 0;
+}
+.home-title {
+    font-size: 36px!important;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0 30px 0;
+    font-weight: bold;
 }
 
 .card:hover {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.card img{
+.card-thumbs a{
+    text-decoration: none;
 
 }
 
 .card-body {
     padding: 20px 10px 5px 10px !important;
-    background-color: white;
+    background-color: #f6f6f6;
+
 }
 
-.card-body h3 {
-    color: #333;
-    text-decoration: none;
-    transition: 100ms;
-}
 
 .card-body a:hover {
     color: #bf0404 !important;
 }
+.price {
+    font-size: 20px;
+}
+.price span {
+    color: red;
+    font-weight: bold;
+    font-size: 24px;
+}
 
 .card-title {
-    color: #000000;
+    color: #181818;
     text-transform: uppercase;
     font-weight: bold;
+    padding: 7px;
+    background: #f1f1f1;
 }
 
 
@@ -215,6 +225,12 @@ footer ul li a {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
+}
+
+@media only screen and (max-width: 768px) {
+  .home-title {
+    font-size: 28px!important;
+  }
 }
 
 

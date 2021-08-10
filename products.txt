@@ -1,0 +1,91 @@
+Baseball sapkák:
+- 305 6P
+- 307 5P
+- 306 Sandwich
+- 301 Rap 5P
+- 301 Rap 6P
+- 301 Kids 6P
+
+Pulóverek:
+	Férfi
+	- 406
+	- 410
+	- 413
+	Női
+	- 416
+	- 414
+	- 411
+	Gyerek:
+	- mindkettő
+	
+Polár:
+	Férfi:
+	- 501
+	- 506
+	- 518
+	Női:
+	- 504
+	Gyerek:
+	- 529
+	
+Ingek:
+	Férfi:
+	- mind a négy
+	Női:
+	- mind az öt
+	
+pulóverek:
+406, 410 413, 
+416, 411, 414, 409
+406, 412
+	
+Kategóriák:
+kornyaku: 
+	férfi királykék,
+	női türkiz,
+	szürke hosszúujju
+	
+galleros:
+	piros férfi,
+	tengerészkék csíkos férfi,
+	rózsaszín női (210) v. menta
+	
+baseball sapka:
+	feher 6p
+	piros sandwich
+	kiralykek 5p
+	rap antik ezust
+	
+Hímzett törölközők visz.
+	- Neves (királykék, Zoltán) 			OK
+	- Sima szülinapos (minta nélkül) 		OK
+	- Szeretlek, sok szívvel (piros) 		OK
+	- Anya csak egy van (krém, pillangó)	OK
+	- Legjobb pasi (ördög, szürke)			
+	- Legjobb barát (türkiz)				OK
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

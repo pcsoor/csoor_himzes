@@ -9,10 +9,10 @@ class Kategoria(MPTTModel):
     nev = models.CharField(max_length=200)
     parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.SET_NULL)
     slug = models.SlugField(blank=True, null=True)
-    image = models.ImageField(null=True, blank=True, upload_to="images", default="placeholder.png")
+    image = models.ImageField(null=True, blank=True, upload_to="images", default="images/placeholder.jpg")
     leiras = models.TextField(null=True, blank=True)
     status = models.BooleanField(default=True)
-    borito = models.ImageField(null=True, blank=True, upload_to="images", default="placeholder.png")
+    borito = models.ImageField(null=True, blank=True, upload_to="images", default="images/placeholder.jpg")
 
     def __str__(self):
         return self.nev
@@ -37,20 +37,38 @@ class Kategoria(MPTTModel):
 
         super().save(*args, **kwargs)
 
-
-class Szin(models.Model):
-    nev = models.CharField(max_length=200)
-    image = models.ImageField(null=True, blank=True, upload_to="images/", default="placeholder.png")
+class Color(models.Model):
+    nev = models.CharField(max_length=255)
     hex = models.CharField(max_length=7)
-
-    def __str__(self):
-        return self.nev + " " + self.image.name
-
-class Meret(models.Model):
-    nev = models.CharField(max_length=100, unique=True)
+    azonosito = models.CharField(max_length=2, null=True, blank=True)
+    sotet = models.BooleanField(default=False)
+    small_image = models.ImageField(null=True, blank=True, upload_to="images/", default="")
 
     def __str__(self):
         return self.nev
+
+    class Meta:
+        ordering = ['nev']
+
+
+class Szin(models.Model):
+    image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/placeholder.jpg")
+    szin = models.ForeignKey(Color, null=True, on_delete=models.SET_NULL, blank=True)
+
+    def __str__(self):
+        return self.image.name
+
+
+
+class Meret(models.Model):
+    nev = models.CharField(max_length=100, unique=True)
+    sorrend = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.nev
+
+    class Meta:
+        ordering = ['sorrend']
 
 
 class Termek(models.Model):
