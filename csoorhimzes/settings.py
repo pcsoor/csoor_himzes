@@ -26,7 +26,7 @@ SECRET_KEY = '#8jr=wd2e@uy-0@k_i2#3nivt&2ycdw3(t-h2f@&^j#7+zdz%9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['csoorhimzes.hu', 'www.csoorhimzes.hu']
 
 
 # Application definition
