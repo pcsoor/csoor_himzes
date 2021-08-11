@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
 {% endblock %}
 
+{% block beta-note %}
+<div class="row">
+    <div class="alert alert-warning alert-dismissible fade show beta-note p-2 mt-3 navbar nav" role="alert">
+        <span class="me-auto">Üdvözöljük a Csoór Hímző Stúdió megújult weboldalán <strong>(beta version)</strong>!</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="bi bi-x-square"></i></span>
+        </button>
+    </div>
+</div>
+{% endblock %}    
+
 
 {% block content %}
 

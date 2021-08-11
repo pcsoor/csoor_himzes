@@ -14,6 +14,7 @@
     <link rel="icon"
           type="image/png"
           href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 
     <!-- Links -->
@@ -36,15 +37,17 @@
 <body>
 <!-- Nav -->
 <div class="container">
+    {% block beta-note %}
+        
+    {% endblock %}
+    
     <div class="row header-top py-3">
         <div class="col-md-3">
             <a href="/"><img alt="Csoór hímzőstúdió" src="{% static 'images/logo.jpg' %}" style="margin:10px 0;"/></a>
         </div>
         <div class="col-md-6 text-center">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aut autem dolorum ea eius fugit in incidunt, inventore, iusto labore magnam molestiae mollitia officia optio possimus quas qui reprehenderit soluta ullam unde velit voluptatum! Aliquid aut delectus dolore dolores enim et incidunt inventore nulla odit perspiciatis, rem sapiente unde.</p>
         </div>
         <div class="col-md-3">
-            <p><span class="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos doloribus facilis fuga illo ipsa sapiente soluta tempora ut. Accusamus assumenda autem repellendus. Eaque est hic itaque obcaecati officia repellat unde.</span></p>
         </div>
 
     </div>

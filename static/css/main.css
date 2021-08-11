@@ -1,3 +1,18 @@
+.beta-note {
+    background-color: rgb(255, 238, 0)!important;
+}
+.beta-note button {
+    background: none;
+    border: none;
+    font-size: 20px!important;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+.beta-note button:hover {
+    color:slategray
+}
+
 
 .header-top {
     margin-bottom: 0 !important;
