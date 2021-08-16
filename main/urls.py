@@ -21,13 +21,21 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.homepage, name="homepage"),
-    path('kapcsolat/', views.kapcsolat, name="kapcsolat"),
+    path('kapcsolat/', views.kapcsolat, name="contact"),
     path('rolunk/', views.rolunk, name="rolunk"),
     path('viszonteladoknak/', views.viszonteladoknak, name="viszonteladoknak"),
     path('cegeknek/', views.cegeknek, name="cegeknek"),
-    path('kategoria/<int:id>-<slug:slug>', views.kategoriak, name='kategoriak'),
-    path('termek/<int:id>-<slug:slug>', views.termekek, name='termekek'),
+
+
+    path('kategoria/<int:category_id>-<slug:category_slug>', views.kategoriak, name='kategoriak'),
+    path('termekek/<int:category_id>-<slug:category_slug>', views.termekek, name='product'),
+
+
+
     path('summernote/', include('django_summernote.urls')),
+    path('kereses/', views.kereses, name='kereses'),
+    path('blog/', views.blog, name='blog'),
+    path('<int:category_id>-<slug:category_slug>/<int:product_id>-<slug:product_slug>', views.oneProduct, name="oneProduct")
 ]
 
 if settings.DEBUG:

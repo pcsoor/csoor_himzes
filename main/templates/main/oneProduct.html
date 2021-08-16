@@ -1,0 +1,161 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% load mptt_tags %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+
+{% block content %}
+    {{ termekek.count }}
+    <div class="container">
+        {% block extra_head %}
+            <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
+        {% endblock %}
+
+        <div class="row mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
+                    {% if category.get_root.nev != category.nev %}
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'kategoriak' category_id=category.get_root.id category_slug=category.get_root.slug %}">{{ category.get_root }}</a>
+                        </li>
+                    {% else %}
+
+                    {% endif %}
+
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="
+{% if category.is_leaf_node %}
+{% url 'product' category_id=category.id category_slug=category.slug %}
+{% else %}
+{% url 'kategoriak' category_id=category.get_root.id category_slug=category.get_root.slug %}
+{% endif %}
+">{{ category }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        {{ product.nev }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row">
+
+            <div class="row my-5 parent-image-block">
+                <div class="col-lg-6 pro-img mb-3" id="pro_parent" style="text-align: center">
+                    <img src="{{ product.image_id.image.url }}"
+                         alt="{{ product.nev }}"
+                         class="{{ product.nev }}"
+                         id="image-to-change"/>
+                </div>
+
+
+                <div class="col-lg-6">
+                    <div class="row px-2">
+                        <h2>{{ product.nev }}</h2>
+                        <hr>
+                    </div>
+                    <div class="row px-2">
+                        {% language 'de' %}
+                            <p class="price my-0 py-0 px-0">A termék ára hímzéssel nettó
+                                <span>{{ product.ar|intcomma }},- FT-tól</span></p>
+                        {% endlanguage %}
+                    </div>
+                    <div class="row px-2">
+                        <table class="table table-bordered col-md-6 mt-3 mb-4">
+                            {% if product.osszetetel != None %}
+                                <tr>
+                                    <td style="font-weight: 700;">Összetétel</td>
+                                    <td>{{ product.osszetetel }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if product.anyag != None %}
+                                <tr>
+                                    <td style="font-weight: 700;">Anyag</td>
+                                    <td>{{ product.anyag }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if product.kulso != None %}
+                                <tr>
+                                    <td style="font-weight: 700;">Mosási útmutató</td>
+                                    <td>{{ product.kulso }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if product.tomeg != None %}
+                                <tr>
+                                    <td style="font-weight: 700;">Tömeg</td>
+                                    <td>{{ product.tomeg }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if meretek.count != 0 %}
+                                <tr>
+                                    <td style="font-weight: 700;">Méretek</td>
+                                    <td>
+                                        {% for meret in product.meret_id.all %}
+                                            {{ meret.nev }}{% if forloop.counter != product.meret_id.all.count %},
+                                            {% else %} {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+
+
+                        </table>
+
+                    </div>
+                    <div class="row mb-4">
+                        {% if szinek.count != 0 or product.szin_id != None %}
+                            <h5>Színskála</h5>
+                            <div class="d-flex justify-content-start thumb-img flex-wrap">
+                                {% for color in product.szin_id.all %}
+                                    <div class="paletta text-center"
+                                         style="
+                                                 {% if color.szin.small_image != "" %}
+                                                     background-image: url({{ color.szin.small_image.url }});
+                                                     background-size: cover;
+                                                 {% else %}
+                                                     background-color: {{ color.szin.hex }};
+                                                 {% endif %}
+                                                 font-weight: 600; padding-top:2px"
+                                         data-toggle="tooltip"
+                                         title="{{ color.szin.azonosito }}-{{ color.szin.nev }}">
+                                            <span class="szin-azonosito"
+                                                  style="color: {% if color.szin.sotet %}black{% else %}white{% endif %};">
+                                                {{ color.szin.azonosito }}
+                                            </span>
+                                        <img src="{{ color.image.url }}" alt="szin"
+                                             style="width: 0; height: 0; float: left;">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <h5>Leírás</h5>
+                        <p>{{ product.leiras|safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {{ kat.leiras|safe }}
+        </div>
+    </div>
+    <!-- onclick="changeImage(this)" -->
+    <script>
+        $(document).ready(function () {
+            $(".paletta").click(function () {
+                var paletta = $(this).children("img").attr("src");
+                var pro_img = $(this).closest(".parent-image-block").children("#pro_parent").children("img");
+                var pro_img_class = $("#pro_parent").children("img").attr("class");
+                //var variable = $(".{{ termek.nev }}").attr("src");
+                //alert(pro_img);
+                $(pro_img).attr("src", paletta);
+            })
+        });
+    </script>
+{% endblock %}

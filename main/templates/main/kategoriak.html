@@ -1,56 +1,100 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% load mptt_tags %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+
 {% block content %}
-    <div class="row mt-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ kat.nev }}</li>
-            </ol>
-        </nav>
-    </div>
-    {% if boritokep %}
-    <div class="row mb-5" id="borito">
+    <div class="container">
+        {% block extra_head %}
+            <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
+        {% endblock %}
+        <div class="row py-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
+                    {% if not categories.first.is_root_node %}
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'kategoriak' categories.first.get_root.id categories.first.get_root.slug%}">
+                                {{ categories.first.get_root.nev }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="breadcrumb-item active" aria-current="page">{{ categories.first.nev }}</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row mb-3">
+            <h2>{{ categories.first }}</h2>
+            <hr>
+        </div>
 
-        <img src="{{ boritokep.url }}" alt="{{ kategoria.nev }}" class="img-fluid">
-    </div>
-    {% endif %}
 
-    <div class="row mb-3">
-        <h2>{{ kat.nev }}</h2>
-        <hr>
-    </div>
+        {% regroup termekek by kategoria_id as category_list %}
 
-
-    <div class="row my-5">
-        {% recursetree kategoria %}
-            {% if not node.is_leaf_node %}
-                {% for child in node.get_descendants %}
-                    <div class="card-thumbs col-lg-4 col-md-6 col-sm-12 mb-4">
-                        <a href="{% url 'termekek' id=child.id slug=child.slug %}">
-                            <div class="card text-white d-flex">
-                                <div class="card-body" style="background-image: url({{ child.borito.url }}); background-position: center; background-repeat: no-repeat; background-size: cover;"></div>
-
-                                <div class="card-title text-center mb-0">{{ child.nev }}</div>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-            {% elif node.is_leaf_node %}
-                <div class="col-6 col-md-4 col-lg-3 mb-4 col-12 col-sm-6">
-                    <div class="card mx-auto">
-                        <a href="/termek/{{ node.id }}/{{ node.slug }}"><img class="card-img-top"
-                                                                             src="http://placehold.it/350x250"
-                                                                             alt="Sample Title"></a>
-                        <div class="card-body">
-                            <h5><a href="/termek/{{ node.id }}/{{ node.slug }}">{{ node.nev }}</a></h5>
-                        </div>
-                    </div>
+        {% for category in category_list %}
+            {% if category.grouper.nev != kategoriak.first.nev %}
+                <div class="row">
+                    <h4>{{ category.grouper }}</h4>
+                    <hr>
                 </div>
             {% endif %}
 
 
-        {% endrecursetree %}
+            <div class="row pb-5 d-flex justify-content-center">
+                {% for product in category.list %}
+                    <div class="col-xl-2 col-lg-3 col-md-4 text-center px-3 small-product-image">
+                        <a href="{% url 'oneProduct' category_id=category.grouper.id category_slug=category.grouper.slug product_id=product.id product_slug=product.slug %}"
+                           class="oneProductUrl">
+
+                            <div id="pro_parent_a" class="pro-img">
+                                <img src="{{ product.image_id.image.url }}" alt="{{ product.nev }}" width="200"
+                                 class="{{ product.nev }}" id="image-to-change"/>
+                            </div>
+
+                            <div class="product-name">
+                                {{ product.nev }}
+                            </div>
+                        </a>
+                        <div class="d-flex justify-content-center thumb-img flex-wrap">
+                            {% for color in product.szin_id.all %}
+                                <div class="paletta text-center"
+                                     style="
+                                             {% if color.szin.small_image != "" %}
+                                                 background-image: url({{ color.szin.small_image.url }});
+                                                 background-size: cover;
+                                             {% else %}
+                                                 background-color: {{ color.szin.hex }};
+                                             {% endif %}
+                                             font-weight: 600; padding-top:3px"
+                                     data-toggle="tooltip"
+                                     title="{{ color.szin.azonosito }}-{{ color.szin.nev }}">
+                                            <span class="szin-azonosito"
+                                                  style="color: {% if color.szin.sotet %}black{% else %}white{% endif %};">
+                                                {{ color.szin.azonosito }}
+                                            </span>
+                                    <img src="{{ color.image.url }}" alt="szin"
+                                         style="width: 0; height: 0; float: left;">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".paletta").click(function () {
+                var paletta = $(this).children("img").attr("src");
+                var pro_img = $(this).closest(".small-product-image").children(".oneProductUrl").children("#pro_parent_a").children("img");
+                var pro_img_class = $("#pro_parent").children("img").attr("class");
+                //var variable = $(".{{ termek.nev }}").attr("src");
+                //alert(pro_img);
+                $(pro_img).attr("src", paletta);
+            })
+        });
+    </script>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="container py-3">
+        {% if searched %}
+            <h2>Keresés a következőre: <strong>{{ searched }}</strong></h2>
+        {% else %}
+            <h2>Nem adta meg a keresési kifejezést!</h2>
+        {% endif %}
+    </div>
+{% endblock %}

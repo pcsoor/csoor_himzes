@@ -5,154 +5,160 @@
 {% load i18n %}
 {% load l10n %}
 {% block content %}
+    <div class="container">
+
+        {% block extra_head %}
+            <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
+        {% endblock %}
+
+        <div class="row mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
+                    {% if kategoriak.get_root.nev != kategoriak.nev %}
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'kategoriak' category_id=kategoriak.get_root.id category_slug=kategoriak.get_root.slug %}">{{ kategoriak.get_parent }}</a>
+                        </li>
+                    {% else %}
+
+                    {% endif %}
+                {% if kategoriak.get_descendants_count > 1 %}
+
+                {% endif %} 
+
+                    <li class="breadcrumb-item active" aria-current="page">{{ kategoriak.get_root }}</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row">
+            <span class="text-muted">Összesen: {{ termekek.count }} db termék</span>
+        </div>
+        <div class="row">
 
 
-    {% block extra_head %}
-        <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
-    {% endblock %}
-
-    <div class="row mt-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
-                {% if kat.get_root.nev != kat.nev%}
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'kategoriak' id=kat.get_root.id slug=kat.get_root.slug %}">{{ kat.get_root }}</a>
-                    </li>
-                {% else %}
-
-                {% endif %}
-
-                <li class="breadcrumb-item active" aria-current="page">{{ kat }}</li>
-            </ol>
-
-        </nav>
-
-    </div>
-
-    <div class="row">
-        <span class="text-muted">Összesen: {{ termekek.count }} db termék</span>
-    </div>
-    <div class="row">
-
-
-        {% if termekek.count != 0 %}
-            {% for termek in termekek|dictsort:"sorrend" %}
-                <div class="row my-5 parent-image-block">
-                    <div class="col-lg-6 pro-img mb-3" id="pro_parent" style="text-align: center">
-                        <img src="{{ termek.image_id.image.url }}"
-                             alt="{{ termek.nev }}"
-                             class="{{ termek.nev }}"
-                             id="image-to-change" />
-                    </div>
-
-
-                    <div class="col-lg-6">
-                        <div class="row px-2">
-                            <h2>{{ termek.nev }}</h2>
-                            <hr>
+            {% if termekek.count != 0 %}
+                {% for termek in termekek|dictsort:"sorrend" %}
+                    <div class="row my-5 parent-image-block">
+                        <div class="col-lg-6 pro-img mb-3" id="pro_parent" style="text-align: center">
+                            <img src="{{ termek.image_id.image.url }}"
+                                 alt="{{ termek.nev }}"
+                                 class="{{ termek.nev }}"
+                                 id="image-to-change"/>
                         </div>
-                    <div class="row px-2">
-                        {% language 'de' %}
-                        <p class="price my-0 py-0 px-0">A termék ára hímzéssel nettó <span>{{ termek.ar|intcomma }},- FT-tól</span></p>
-                        {% endlanguage %}
-                    </div>
-                        <div class="row px-2">
-                            <table class="table table-bordered col-md-6 mt-3 mb-4">
-                                {% if termek.osszetetel != None %}
-                                    <tr>
-                                        <td style="font-weight: 700;">Összetétel</td>
-                                        <td>{{ termek.osszetetel }}</td>
-                                    </tr>
-                                {% endif %}
-                                {% if termek.anyag != None %}
-                                    <tr>
-                                        <td style="font-weight: 700;">Anyag</td>
-                                        <td>{{ termek.anyag }}</td>
-                                    </tr>
-                                {% endif %}
-                                {% if termek.kulso != None %}
-                                    <tr>
-                                        <td style="font-weight: 700;">Mosási útmutató</td>
-                                        <td>{{ termek.kulso }}</td>
-                                    </tr>
-                                {% endif %}
-                                {% if termek.tomeg != None %}
-                                    <tr>
-                                        <td style="font-weight: 700;">Tömeg</td>
-                                        <td>{{ termek.tomeg }}</td>
-                                    </tr>
-                                {% endif %}
-                                {% if meretek.count != 0 %}
-                                    <tr>
-                                        <td style="font-weight: 700;">Méretek</td>
-                                        <td>
-                                            {% for meret in termek.meret_id.all %}
-                                                {{ meret.nev }}{% if forloop.counter != termek.meret_id.all.count %},
-                                                {% else %} {% endif %}
-                                            {% endfor %}
-                                        </td>
-                                    </tr>
-                                {% endif %}
 
 
-                            </table>
+                        <div class="col-lg-6">
+                            <div class="row px-2">
+                                <h2>{{ termek.nev }}</h2>
+                                <hr>
+                            </div>
+                            <div class="row px-2">
+                                {% language 'de' %}
+                                    <p class="price my-0 py-0 px-0">A termék ára hímzéssel nettó
+                                        <span>{{ termek.ar|intcomma }},- FT-tól</span></p>
+                                {% endlanguage %}
+                            </div>
+                            <div class="row px-2">
+                                <table class="table table-bordered col-md-6 mt-3 mb-4">
+                                    {% if termek.osszetetel != None %}
+                                        <tr>
+                                            <td style="font-weight: 700;">Összetétel</td>
+                                            <td>{{ termek.osszetetel }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if termek.anyag != None %}
+                                        <tr>
+                                            <td style="font-weight: 700;">Anyag</td>
+                                            <td>{{ termek.anyag }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if termek.kulso != None %}
+                                        <tr>
+                                            <td style="font-weight: 700;">Mosási útmutató</td>
+                                            <td>{{ termek.kulso }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if termek.tomeg != None %}
+                                        <tr>
+                                            <td style="font-weight: 700;">Tömeg</td>
+                                            <td>{{ termek.tomeg }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if meretek.count != 0 %}
+                                        <tr>
+                                            <td style="font-weight: 700;">Méretek</td>
+                                            <td>
+                                                {% for meret in termek.meret_id.all %}
+                                                    {{ meret.nev }}{% if forloop.counter != termek.meret_id.all.count %}
+                                                        ,
+                                                    {% else %} {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
 
-                        </div>
-                        <div class="row mb-4">
-                            {% if szinek.count != 0 or termek.szin_id != None %}
-                                <h5>Színskála</h5>
-                                <div class="d-flex justify-content-start thumb-img flex-wrap">
-                                    {% for color in termek.szin_id.all %}
-                                        <div class="paletta text-center"
-                                             style="
-                                                     {% if color.szin.small_image != "" %}
-                                                     background-image: url({{ color.szin.small_image.url }});
-                                                     background-size: cover;
-                                                     {% else %}
-                                                     background-color: {{ color.szin.hex }};
-                                                     {% endif %}
-                                                     font-weight: 600; padding-top:2px"
-                                             data-toggle="tooltip" title="{{ color.szin.azonosito }}-{{ color.szin.nev }}">
+
+                                </table>
+
+                            </div>
+                            <div class="row mb-4">
+                                {% if szinek.count != 0 or termek.szin_id != None %}
+                                    <h5>Színskála</h5>
+                                    <div class="d-flex justify-content-start thumb-img flex-wrap">
+                                        {% for color in termek.szin_id.all %}
+                                            <div class="paletta text-center"
+                                                 style="
+                                                         {% if color.szin.small_image != "" %}
+                                                             background-image: url({{ color.szin.small_image.url }});
+                                                             background-size: cover;
+                                                         {% else %}
+                                                             background-color: {{ color.szin.hex }};
+                                                         {% endif %}
+                                                         font-weight: 600; padding-top:2px"
+                                                 data-toggle="tooltip"
+                                                 title="{{ color.szin.azonosito }}-{{ color.szin.nev }}">
                                             <span class="szin-azonosito"
                                                   style="color: {% if color.szin.sotet %}black{% else %}white{% endif %};">
                                                 {{ color.szin.azonosito }}
                                             </span>
-                                            <img src="{{ color.image.url }}" alt="szin" style="width: 0; height: 0; float: left;">
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        </div>
+                                                <img src="{{ color.image.url }}" alt="szin"
+                                                     style="width: 0; height: 0; float: left;">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
 
-                        <div class="row">
-                            <h5>Leírás</h5>
-                            <p>{{ termek.leiras|safe }}</p>
+                            <div class="row">
+                                <h5>Leírás</h5>
+                                <p>{{ termek.leiras|safe }}</p>
+                            </div>
                         </div>
                     </div>
+                    {% if forloop.counter != termekek.count %}
+                        <hr>
+                    {% else %}
+
+                    {% endif %}
+
+
+
+                {% endfor %}
+
+
+            {% else %}
+                <div class="row">
+                    <div class="col-12 bg-warning rounded">
+                        <p class="mt-3">Nincs termék a kategóriában!</p>
+                    </div>
                 </div>
-                {% if forloop.counter != termekek.count %}
-                    <hr>
-                {% else %}
+            {% endif %}
+        </div>
 
-                {% endif %}
-
-
-
-            {% endfor %}
-
-
-        {% else %}
-            <div class="row">
-                <div class="col-12 bg-warning rounded">
-                    <p class="mt-3">Nincs termék a kategóriában!</p>
-                </div>
-            </div>
-        {% endif %}
-    </div>
-
-    <div class="row">
-    {{ kat.leiras|safe }}
+        <div class="row">
+            {{ kat.leiras|safe }}
+        </div>
     </div>
     <!-- onclick="changeImage(this)" -->
     <script>

@@ -1,12 +1,17 @@
 {% extends "main/base.html" %}
 
 {% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
 {% load mptt_tags %}
+
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
 {% endblock %}
 
 {% block beta-note %}
+    <!--
 <div class="row">
     <div class="alert alert-warning alert-dismissible fade show beta-note p-2 mt-3 navbar nav" role="alert">
         <span class="me-auto">Üdvözöljük a Csoór Hímző Stúdió megújult weboldalán <strong>(beta version)</strong>!</span>
@@ -15,42 +20,129 @@
         </button>
     </div>
 </div>
-{% endblock %}    
+ -->
+{% endblock %}
 
 
 {% block content %}
+    <div id="carouselExampleIndicators" class="carousel slide d-xs-none d-sm-none d-md-block" data-bs-ride="carousel">
 
-    <div class="row my-5">
 
-    {% for node in kategoriak %}
-        {% if forloop.counter0 == 0 %}
-            <h2 class="home-title">Pólók, törölközők gépi hímzése</h2>
-        {% endif %}
-        {% if forloop.counter0 == 3 %}
-            <h2 class="home-title">Az ár a hímzést tartalmazza</h2>
-        {% endif %}
-        {% if forloop.counter0 == 13 %}
-            <h2 class="home-title">Lógók, felvarrók hímzése</h2>
-        {% endif %}
-        {% if forloop.counter0 == 20 %}
-            <h2 class="home-title">Minőségi munka, gyors határidő</h2>
-        {% endif %}
+        <!-- INDICATORS -->
+        <div class="carousel-indicators">
+            {% for carousel in carousels %}
+                <button type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="{{ carousel.order }}" class="active" aria-current="true"
+                        aria-label="Slide 1"></button>
+            {% endfor %}
+        </div>
 
-        {% if node.is_root_node and node.status %}
-                    <div class="card-thumbs col-lg-4 col-md-6 col-sm-12 mb-4">
-                        <a href="{% if not node.is_leaf_node %}{% url 'kategoriak' id=node.id slug=node.slug %}{% elif node.is_leaf_node %}{% url 'termekek' id=node.id slug=node.slug %}{% endif %}">
-                            <div class="card">
-                                <div class="card-body" style="background-image: url({{ node.image.url }}); background-position: center; background-repeat: no-repeat; background-size: cover;"></div>
 
-                                <div class="card-title text-center mb-0" {% if node.nev|length >= 35 %}style="font-size: 14px!important;"{% endif %}>{{ node.nev }}</div>
-                            </div>
-                        </a>
-
+        <!-- INNER -->
+        <div class="carousel-inner">
+            {% for carousel in carousels %}
+                {% if forloop.first %}
+                    <div class="carousel-item active">
+                        <img src="{{ carousel.image.url }}" class="d-block w-100" alt="Hímzett"
+                             id="{{ carousel.order }}">
+                    </div>
+                {% else %}
+                    <div class="carousel-item">
+                        <img src="{{ carousel.image.url }}" class="d-block w-100" alt="Hímzett"
+                             id="{{ carousel.order }}">
                     </div>
                 {% endif %}
-    {% endfor %}
+            {% endfor %}
 
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="container">
 
-
+        <div class="row my-5 text-center">
+            <h2>Kategóriák</h2>
+        </div>
+        <div class="row">
+            {% for node in kategoriak %}
+                {% if node.is_root_node and node.status %}
+                    <div class="card-thumbs col-lg-4 col-md-6 col-sm-6">
+                        <div class="inner-card">
+                            <a href="
+                            {% if not node.is_leaf_node %}
+                                {% url 'kategoriak' category_id=node.id category_slug=node.slug %}
+                            {% elif node.is_leaf_node %}
+                                {% url 'product' category_id=node.id category_slug=node.slug %}
+                            {% endif %}
+                            ">
+                                <div class="card">
+                                    <img class="card-img-top" src="{{ node.image.url }}" alt="Card image cap">
+                                </div>
+                                <div class="card-title">
+                                    <div class="kat-name px-2 py-3">
+                                        <p>{{ node.nev }}</p>
+                                    </div>
+                                    {% if node.ar is not null %}
+                                        <div class="price-tag p-1">
+                                            {% language 'de' %}
+                                                <p>Nettó <span>{{ node.ar|intcomma }},- </span>FT-tól</p>
+                                            {% endlanguage %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row feature-cards py-5">
+            <div class="col-xl-3 col-lg-6">
+                <div class="feature-title">
+                    <h4 class="fw-bold">Pólók, törölközők gépi hímzése</h4>
+                    <hr>
+                </div>
+                <div class="feature-desc">
+                    Cégeknek, viszonteladóknak, szállodáknak hímzett termékek <br>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+                <div class="feature-title">
+                    <h4 class="fw-bold">Az ár a hímzést tartalmazza</h4>
+                    <hr>
+                </div>
+                <div class="feature-desc">
+                    Az ár a hímzést tartalmazza, és forintban értendők.<br>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+                <div class="feature-title">
+                    <h4 class="fw-bold">Lógók, felvarrók hímzése</h4>
+                    <hr>
+                </div>
+                <div class="feature-desc">
+                    Cégeknek, viszonteladóknak, szállodáknak hímzett termékek <br>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+                <div class="feature-title">
+                    <h4 class="fw-bold">Minőségi munka, gyors határidő</h4>
+                    <hr>
+                </div>
+                <div class="feature-desc">
+                    Cégeknek, viszonteladóknak, szállodáknak hímzett termékek <br>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

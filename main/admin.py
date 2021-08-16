@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import Kategoria, Szin, Meret, Termek, Color
+from .models import Kategoria, Szin, Meret, Termek, Color, Carousel
 from mptt.admin import DraggableMPTTAdmin
 from django_summernote.admin import SummernoteModelAdmin
 
 
 class KategoriaAdmin(DraggableMPTTAdmin, SummernoteModelAdmin):
     mptt_indent_field = "nev"
-    list_display = ('tree_actions', 'indented_title',
-                    'related_Termeks_count', 'related_Termeks_cumulative_count')
+    list_display = ('tree_actions', 'indented_title', 'ar', 'related_Termeks_count', 'related_Termeks_cumulative_count')
     list_display_links = ('indented_title',)
+    list_editable = ('ar',)
     summernote_fields = ('leiras',)
 
     def get_queryset(self, request):
@@ -41,6 +41,7 @@ class KategoriaAdmin(DraggableMPTTAdmin, SummernoteModelAdmin):
 
 class TermekekAdmin(SummernoteModelAdmin):
     list_display = ('nev', 'sorrend', 'get_kategoria', 'get_meretek', 'ar', 'osszetetel', 'kulso', 'anyag')
+    list_editable = ('sorrend', 'ar')
     filter_horizontal = ['szin_id','meret_id']
     summernote_fields = ('leiras',)
 
@@ -81,5 +82,6 @@ admin.site.register(Szin, SzinAdmin)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(Meret, MeretekAdmin)
 admin.site.register(Termek, TermekekAdmin)
+admin.site.register(Carousel)
 
 

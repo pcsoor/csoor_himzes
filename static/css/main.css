@@ -1,25 +1,38 @@
-.beta-note {
-    background-color: rgb(255, 238, 0)!important;
+body {
+    font-family: 'Roboto', sans-serif !important;
 }
+
+.beta-note {
+    background-color: rgb(255, 238, 0) !important;
+}
+
 .beta-note button {
     background: none;
     border: none;
-    font-size: 20px!important;
+    font-size: 20px !important;
     border-radius: 50%;
     width: 30px;
     height: 30px;
 }
+
 .beta-note button:hover {
-    color:slategray
+    color: slategray
 }
 
+.header-right ul {
+    text-align: right;
+}
+
+.header-right ul li {
+    list-style: none;
+    font-size: 16px;
+}
 
 .header-top {
     margin-bottom: 0 !important;
 }
 
 .nav-elements > li > a {
-    font-size: 15px !important;
     text-transform: uppercase !important;
     font-weight: 500;
 }
@@ -27,9 +40,14 @@
 .navbar {
     background-color: #810d0d;
     padding: 0 !important;
+
 }
 
 .navbar .nav-link:hover {
+    background-color: #a50a0a;
+}
+
+.active-link {
     background-color: #a50a0a;
 }
 
@@ -48,9 +66,22 @@
 
 .navbar .nav-link {
     color: white !important;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 17px;
     padding: 15px 25px !important;
+}
+
+.search-section button {
+    background: #ac0a0a;
+    color: white;
+    border-radius: unset;
+}
+
+.search-section button:hover {
+    color: #bebebe;
+}
+
+.search-section input {
+    border-radius: unset;
 }
 
 /*   MEGA MENU   */
@@ -152,55 +183,128 @@ footer ul li a {
 
 /* Cards */
 .card {
-    transition: 120ms;
-    min-width: 350px;
-    max-width: 350px;
-    min-height: 260px;
-    max-height: 260px;
-    margin: 15px 0;
-}
-.home-title {
-    font-size: 36px!important;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 10px 0 30px 0;
-    font-weight: bold;
+    overflow: hidden;
+    border-radius: 0 !important;
+    border-bottom: 1px solid grey;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
 }
 
-.card:hover {
+.home-title {
+    font-size: 32px !important;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    color: #212121;
+    padding: 10px 0;
+    margin: 50px 0 !important;
+}
+
+.home-title:first-child {
+    margin: 0 0 50px 0 !important;
+}
+
+.inner-card:hover {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.card-thumbs a{
+.card-thumbs {
+    margin: 50px 0;
+}
+
+.card-thumbs a {
     text-decoration: none;
-
 }
 
-.card-body {
-    padding: 20px 10px 5px 10px !important;
-    background-color: #f6f6f6;
-
+.card img {
+    border: none !important;
 }
 
-
-.card-body a:hover {
-    color: #bf0404 !important;
+.inner-card {
+    transition: 120ms;
+    max-width: 350px;
+    border: 1px solid #d0d0d0;
 }
+
+.card-img-top {
+}
+
+.card-title {
+    color: black;
+    font-size: 16px;
+    margin: 0 !important;
+}
+
+.card-title p {
+    padding: 0;
+    margin: 0;
+}
+
+.card-title span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-title .price-tag {
+    border-top: 1px solid #d0d0d0;
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-size: 14px;
+    color: #555;
+}
+
+.kat-name {
+    font-weight: 500;
+}
+
+/* TERMEK */
 .price {
     font-size: 20px;
 }
+
 .price span {
     color: red;
     font-weight: bold;
     font-size: 24px;
 }
 
-.card-title {
-    color: #181818;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: 7px;
-    background: #f1f1f1;
+.oneProductUrl {
+    text-decoration: none;
+}
+
+.product-name {
+    font-weight: 500;
+    color: black!important;
+    padding: 10px 0;
+    transition: 150ms ease-in;
+}
+.small-product-image {
+    transition: 200ms;
+    margin: 30px 20px;
+}
+.oneProductUrl:hover .product-name {
+    color: red!important;
+}
+.paletta {
+    margin: 2px!important;
+}
+
+.feature-cards {
+    background-color: #e9e3dd;
+    text-align: center;
+}
+
+.feature-cards > div {
+    padding: 20px 10px;
+}
+
+.feature-cards .feature-title hr {
+    width: 15%;
+    margin: 20px auto;
+    background: black !important;
+    height: 3px;
+    opacity: 1;
 }
 
 
@@ -243,9 +347,9 @@ footer ul li a {
 }
 
 @media only screen and (max-width: 768px) {
-  .home-title {
-    font-size: 28px!important;
-  }
+    .home-title {
+        font-size: 28px !important;
+    }
 }
 
 
