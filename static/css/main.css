@@ -40,6 +40,10 @@ body {
 .navbar {
     background-color: #810d0d;
     padding: 0 !important;
+}
+
+.dropdown-menu {
+    z-index: 10;
 
 }
 
