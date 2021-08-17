@@ -7,7 +7,6 @@
 {% load l10n %}
 
 {% block content %}
-    {{ termekek.count }}
     <div class="container">
         {% block extra_head %}
             <link rel="stylesheet" href="{% static 'css/extra_style.css' %}"/>
@@ -40,6 +39,10 @@
                 </ol>
             </nav>
         </div>
+
+    {% if product is not null %}
+
+
 
         <div class="row">
 
@@ -141,8 +144,14 @@
             </div>
         </div>
 
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+  Nincs termék a kategóriában!
+</div>
+    {% endif %}
+
         <div class="row">
-            {{ kat.leiras|safe }}
+            {{ category.leiras|safe }}
         </div>
     </div>
     <!-- onclick="changeImage(this)" -->

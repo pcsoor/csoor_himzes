@@ -132,6 +132,10 @@ body {
 
 
 /* Footer */
+footer {
+    background-color: #1a1a1a;
+}
+
 footer ul {
     padding: 0;
     margin: 0;
@@ -156,27 +160,31 @@ footer ul li {
 
 footer h5 {
     color: white;
+    display: block;
 }
 
+
 footer ul li {
-    color: #efc2c2;
+    color: #b3b3b3;
 }
 
 footer ul li a {
-    color: #efc2c2;
+    color: #b3b3b3;
 }
-
+.under-footer {
+    background-color: #000000;
+}
 .copyright-section p {
-    color: #efc2c2;
+    color: white;
 }
 
 .copyright-section a {
-    color: #efc2c2;
+    color: white;
 }
 
-@media all and (max-width: 768px) {
-    footer #developer {
-        text-align: center;
+@media all and (max-width: 992px) {
+    footer ul li{
+        text-align: left!important;
     }
 }
 
@@ -290,9 +298,20 @@ footer ul li a {
     margin: 2px!important;
 }
 
+/* FEATURE CARDS */
+
 .feature-cards {
-    background-color: #e9e3dd;
+    background-color: #f1f1f1;
     text-align: center;
+}
+
+.feature-cards img {
+    user-drag: none!important;
+    -webkit-user-drag: none!important;
+    user-select: none!important;
+    -moz-user-select: none!important;
+    -webkit-user-select: none!important;
+    -ms-user-select: none!important;
 }
 
 .feature-cards > div {
@@ -300,11 +319,12 @@ footer ul li a {
 }
 
 .feature-cards .feature-title hr {
-    width: 15%;
+    width: 10%;
     margin: 20px auto;
     background: black !important;
-    height: 3px;
+    height: 5px;
     opacity: 1;
+    border-radius: 5px;
 }
 
 

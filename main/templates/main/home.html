@@ -25,9 +25,9 @@
 
 
 {% block content %}
-    <div id="carouselExampleIndicators" class="carousel slide d-xs-none d-sm-none d-md-block" data-bs-ride="carousel">
 
-
+    <!-- CAROUSEL -->
+    <div id="carouselExampleIndicators" class="carousel slide d-none d-sm-block" data-bs-ride="carousel">
         <!-- INDICATORS -->
         <div class="carousel-indicators">
             {% for carousel in carousels %}
@@ -75,7 +75,7 @@
             {% for node in kategoriak %}
                 {% if node.is_root_node and node.status %}
                     <div class="card-thumbs col-lg-4 col-md-6 col-sm-6">
-                        <div class="inner-card">
+                        <div class="inner-card mx-auto">
                             <a href="
                             {% if not node.is_leaf_node %}
                                 {% url 'kategoriak' category_id=node.id category_slug=node.slug %}
@@ -108,6 +108,9 @@
     <div class="container-fluid">
         <div class="row feature-cards py-5">
             <div class="col-xl-3 col-lg-6">
+                <div class="featured-icon mb-4">
+                    <img src="{% static 'images/tshirt.png' %}" alt="Pólók, törölközők gépi hímzése ikon" width="70" ondragstart="return false;">
+                </div>
                 <div class="feature-title">
                     <h4 class="fw-bold">Pólók, törölközők gépi hímzése</h4>
                     <hr>
@@ -117,6 +120,9 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-6">
+                <div class="featured-icon mb-4">
+                    <img src="{% static 'images/coin.png' %}" alt="Pólók, törölközők gépi hímzése ikon" width="70" ondragstart="return false;">
+                </div>
                 <div class="feature-title">
                     <h4 class="fw-bold">Az ár a hímzést tartalmazza</h4>
                     <hr>
@@ -126,6 +132,9 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-6">
+                <div class="featured-icon mb-4">
+                    <img src="{% static 'images/creativity.png' %}" alt="Pólók, törölközők gépi hímzése ikon" width="70" ondragstart="return false;">
+                </div>
                 <div class="feature-title">
                     <h4 class="fw-bold">Lógók, felvarrók hímzése</h4>
                     <hr>
@@ -135,6 +144,9 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-6">
+                <div class="featured-icon mb-4">
+                    <img src="{% static 'images/audit.png' %}" alt="Pólók, törölközők gépi hímzése ikon" width="70" ondragstart="return false;">
+                </div>
                 <div class="feature-title">
                     <h4 class="fw-bold">Minőségi munka, gyors határidő</h4>
                     <hr>

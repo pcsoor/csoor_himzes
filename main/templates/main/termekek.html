@@ -157,9 +157,10 @@
         </div>
 
         <div class="row">
-            {{ kat.leiras|safe }}
+            {{ kategoriak.first.leiras|safe }}
         </div>
     </div>
+    {{ kategoriak.first.leiras|safe }}
     <!-- onclick="changeImage(this)" -->
     <script>
         $(document).ready(function () {
