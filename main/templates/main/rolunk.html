@@ -2,7 +2,67 @@
 {% block content %}
     <div class="container">
         <div class="row py-5">
-            <h2>Rólunk, cégünk történetéről..</h2>
+            <h2>Cégismertető</h2>
+        </div>
+
+        <div class="row pb-5">
+            <div class="col">
+                <p>
+                    Cégünk 1999 óta nyújt a gépi hímzés területén kimagasló munkát. Az elmúlt több, mint 10 év alatt
+                    gépparkunkat folyamatosan bővítettük. <br>
+                    A megszerzett tapasztalatok birtokában készítünk magas színvonalon hímző programot, mely a gépi
+                    hímzés egyik alappillére. Ennek költségét 100 db-os megrendelés esetén már átvállaljuk.<br>
+                    Egyedi gépparkunk lehetővé teszi 10 db-tól akár 10.000 db-os megrendelés gyors, igényes
+                    teljesítését is. <br>
+                    Vállalunk továbbá postai kiszállítást, illetve 100 db-tól a késztermék leszállítását.
+                </p>
+                <p>A gépi hímzést számos területen tudjuk alkalmazni:</p>
+                <ul>
+                    <li>
+                        <a href="{% url 'product' category_id=viszonteladoknak.id category_slug=viszonteladoknak.slug %}">ajándék
+                            törölközők</a> hímzése (egyedileg hímzett törölközők, pl.
+                        nevek, szövegek)
+                    </li>
+                    <li>
+                        cégeknek reklámfelületnek kiválóan alkalmas a hímzett törölköző, <a
+                            href="{% url 'product' category_id=felvarrok.id category_slug=felvarrok.slug %}">céges
+                        ajándékozás</a> céljából ( logó hímzése )
+                    </li>
+                    <li>
+                        hímzett <a href="{% url 'kategoriak' category_id=kornyaku.id category_slug=kornyaku.slug %}">környakú</a>-,
+                        <a href="{% url 'kategoriak' category_id=galleros.id category_slug=galleros.slug %}">galléros</a>
+                        pólók ( logók, címerek, egyéb feliratok hímzése )
+                    </li>
+                    <li>
+                        hímzett <a
+                            href="{% url 'kategoriak' category_id=pulover.id category_slug=pulover.slug %}">pulóverek</a>,
+                        <a href="{% url 'kategoriak' category_id=ing.id category_slug=ing.slug %}">ingek</a>
+                    </li>
+                    <li>
+                        hímzett <a href="{% url 'kategoriak' category_id=baseball.id category_slug=baseball.slug %}">baseball
+                        sapka</a>
+                    </li>
+                    <li>
+                        munkaruha hímzés
+                    </li>
+                    <li>
+                        hímzés bármely hozott anyagra.
+                    </li>
+                </ul>
+                <p>
+                    Törölközőt 25 féle színben, pólót (galléros, környakú)
+                    pulóvert, inget, baseball sapkát kedvező áron tudunk biztosítani.
+                </p>
+                <p>
+                    Nagyobb darabszám esetén a leszállítással sem kell foglalkoznia.<br>
+                    Egyedi logóját elküldheti e-mailben, JPG formátumban, melyről 1-2 nap alatt kiváló
+                    hímzésmintát készítünk. Igény szerint próbahímzést vegzünk.
+                </p>
+                <p>Várjuk jelentkezését!</p>
+                <p>
+                    Elérhetőségeinket a <a href="{% url 'contact' %}">kapcsolat</a> menüpontban megtalálja.
+                </p>
+            </div>
         </div>
     </div>
 {% endblock %}

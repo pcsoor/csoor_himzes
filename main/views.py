@@ -23,7 +23,24 @@ def kapcsolat(request):
     return render(request, 'main/kapcsolat.html')
 
 def rolunk(request):
-    return render(request, 'main/rolunk.html')
+    galleros = Kategoria.objects.get(id=12)
+    kornyaku = Kategoria.objects.get(id=1)
+    baseball = Kategoria.objects.get(id=16)
+    ing = Kategoria.objects.get(id=28)
+    pulover = Kategoria.objects.get(id=17)
+    viszonteladoknak = Kategoria.objects.get(id=25)
+    felvarrok = Kategoria.objects.get(id=34)
+
+    context = {
+        'galleros': galleros,
+        'kornyaku': kornyaku,
+        'baseball': baseball,
+        'ing': ing,
+        'pulover': pulover,
+        'viszonteladoknak': viszonteladoknak,
+        'felvarrok': felvarrok,
+    }
+    return render(request, 'main/rolunk.html', context)
 
 
 def kategoriak(request, category_id, category_slug):
