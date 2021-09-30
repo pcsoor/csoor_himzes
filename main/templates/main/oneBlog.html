@@ -1,0 +1,27 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="/blog">Blog</a></li>
+                    <li class="breadcrumb-item active">
+                        {{ blog.title }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row py-3">
+            <h2>{{ blog.title }}</h2>
+            <div class="blog-body row py-4">
+                    <img src="{{ blog.image_cover.url }}" alt="{{ blog.title }} borítókép"
+                     class="rounded pull-left blog_cover mb-3 img-fluid">
+                    <p class="block ml-4">{{ blog.description|safe }}</p>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

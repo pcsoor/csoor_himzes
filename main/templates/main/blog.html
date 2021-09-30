@@ -2,8 +2,35 @@
 
 {% block content %}
     <div class="container">
-        <div class="row py-5">
-            <h2>Blog</h2>
+        <div class="row mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Kezdőlap</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row py-5 ">
+            <div class="d-flex justify-content-around flex-wrap">
+                {% for blog in blogs %}
+                    <div class="blog m-3">
+                        <a href="{% url 'oneBlog' blog_id=blog.id %}" class="blog-title-link">
+                            <div class="col">
+                                <div class="row">
+                                    <img src="{{ blog.image_cover.url }}" alt="{{ blog.title }} borítókép" class="blog_cover">
+                                </div>
+                            </div>
+                            <div class="blog-title">
+                                <h2>{{ blog.title }}</h2>
+                            </div>
+
+                        </a>
+                        <div class="short_description">
+                            {{ blog.short_description|safe }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -144,6 +144,15 @@ class Kepek(models.Model):
     id = models.AutoField(primary_key=True)
     image = models.ImageField(null=True, blank=True, upload_to="images/", default="placeholder.png")
 
+class Blog(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=255, blank=False)
+    short_description = models.TextField(blank=False)
+    description = models.TextField(blank=False)
+    posted_at = models.DateField()
+    order = models.IntegerField()
+    image_cover = models.ImageField(null=True, blank=True, upload_to="images/", default="placeholder.png")
+
 
 
 

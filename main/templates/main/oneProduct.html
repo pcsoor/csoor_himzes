@@ -26,12 +26,12 @@
 
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="
-{% if category.is_leaf_node %}
-{% url 'product' category_id=category.id category_slug=category.slug %}
-{% else %}
-{% url 'kategoriak' category_id=category.get_root.id category_slug=category.get_root.slug %}
-{% endif %}
-">{{ category }}</a>
+                            {% if category.is_leaf_node %}
+                                {% url 'product' category_id=category.id category_slug=category.slug %}
+                            {% else %}
+                                {% url 'kategoriak' category_id=category.get_root.id category_slug=category.get_root.slug %}
+                            {% endif %}
+                            ">{{ category }}</a>
                     </li>
                     <li class="breadcrumb-item active">
                         {{ product.nev }}

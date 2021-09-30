@@ -134,6 +134,23 @@ body {
     /* The width is the width of the web page */
 }
 
+/* BLOG */
+.blog_cover {
+    max-width: 350px!important;
+    max-height: 200px!important;
+}
+.blog-title-link {
+    text-decoration: none;
+}
+.blog-title-link h2{
+    text-decoration: none;
+    color: black;
+    transition: 200ms;
+}
+
+.blog-title-link:hover h2{
+    color: #d20505;
+}
 
 /* Footer */
 footer {

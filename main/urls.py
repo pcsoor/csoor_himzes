@@ -35,6 +35,7 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('kereses/', views.kereses, name='kereses'),
     path('blog/', views.blog, name='blog'),
+    path('blog/<int:blog_id>', views.oneBlog, name='oneBlog'),
     path('<int:category_id>-<slug:category_slug>/<int:product_id>-<slug:product_slug>', views.oneProduct, name="oneProduct")
 ]
 

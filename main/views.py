@@ -3,7 +3,7 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from .models import Szin, Meret, Termek, Kategoria, Color, Carousel
+from .models import Szin, Meret, Termek, Kategoria, Color, Carousel, Blog
 
 # Create your views here.
 def homepage(request):
@@ -98,7 +98,22 @@ def viszonteladoknak(request):
 
 
 def blog(request):
-    return render(request, 'main/blog.html')
+    blogs = Blog.objects.all
+    context = {
+        'blogs': blogs
+    }
+    return render(request, 'main/blog.html', context)
+
+
+def oneBlog(request, blog_id):
+    blog = Blog.objects.get(id=blog_id)
+
+    context = {
+        'blog': blog
+    }
+
+    return render(request, 'main/oneBlog.html', context)
+
 
 
 def cegeknek(request):
@@ -117,4 +132,3 @@ def kereses(request):
         return render(request, 'main/kereses.html', context)
     else:
         return render(request, 'main/kereses.html')
-

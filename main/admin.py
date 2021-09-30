@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Kategoria, Szin, Meret, Termek, Color, Carousel
+from .models import Kategoria, Szin, Meret, Termek, Color, Carousel, Blog
 from mptt.admin import DraggableMPTTAdmin
 from django_summernote.admin import SummernoteModelAdmin
 
@@ -76,6 +76,12 @@ class ColorAdmin(admin.ModelAdmin):
     list_editable = ('hex', 'azonosito', 'small_image','sotet')
 
 
+class BlogAdmin(SummernoteModelAdmin):
+    list_display = ('id', 'title', 'order', 'posted_at')
+    list_editable = ('title', 'order',)
+    summernote_fields = ('short_description', 'description')
+
+
 # Register your models here.
 admin.site.register(Kategoria, KategoriaAdmin)
 admin.site.register(Szin, SzinAdmin)
@@ -83,5 +89,6 @@ admin.site.register(Color, ColorAdmin)
 admin.site.register(Meret, MeretekAdmin)
 admin.site.register(Termek, TermekekAdmin)
 admin.site.register(Carousel)
+admin.site.register(Blog, BlogAdmin)
 
 
